@@ -1,3 +1,12 @@
+## NEW
+adb start
+```bash
+//open
+adb shell am start -n org.proxydroid/.CmdActivity -e act stop
+//close
+adb shell am start -n org.proxydroid/.CmdActivity -e act start  -e vpntype typeValue  -e ip ipValue-e port portValue
+```
+
 ## INTRO
 
 Global Proxy App for Android System
