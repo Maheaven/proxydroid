@@ -138,7 +138,7 @@ public class ProxyDroid extends PreferenceActivity
     private CheckBoxPreference isBypassAppsCheck;
     private Preference proxyedApps;
     private Preference bypassAddrs;
-    private AdView adView;
+//    private AdView adView;
     private BroadcastReceiver ssidReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -152,6 +152,28 @@ public class ProxyDroid extends PreferenceActivity
             loadNetworkList();
         }
     };
+
+    private void setProxy(){
+        if(null!=getIntent()&&null!=getIntent().getExtras()){
+            Bundle bundle = getIntent().getExtras();
+            String act = bundle.getString("action");
+            if("start".equals(act)){
+                Profile profile = (Profile) bundle.getSerializable("Profile");
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+                settings.edit().putString("host",profile.getHost())
+                        .putString("port",""+profile.getPort())
+                        .putString("proxyType",profile.getProxyType())
+                        .putString("bypassAddrs",profile.getBypassAddrs())
+                        .putBoolean("isAutoSetProxy",profile.isAutoSetProxy())
+                        .apply();
+                serviceStart();
+                finish();
+            }else if("stop".equals(act)){
+                serviceStop();
+                finish();
+            }
+        }
+    }
 
     private void showAbout() {
 
@@ -318,24 +340,24 @@ public class ProxyDroid extends PreferenceActivity
         ((ProxyDroidApplication)getApplication())
                 .firebaseAnalytics.setCurrentScreen(this, "home_screen", null);
 
-        // Create the adView
-        adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-9097031975646651/4806879927");
-        adView.setAdSize(AdSize.SMART_BANNER);
-        // Lookup your LinearLayout assuming it’s been given
-        // the attribute android:id="@+id/mainLayout"
-        ViewParent parent = getListView().getParent();
-        LinearLayout layout = getLayout(parent);
-
-        // disable adds
-        if (layout != null) {
-            // Add the adView to it
-            layout.addView(adView, 0);
-            adView.loadAd(new AdRequest.Builder()
-                    .addTestDevice("F58907F28184A828DD0DB6F8E38189C6")
-                    .addTestDevice("236666026C17FEFB1B547C4A3B2322CD")
-                    .build());
-        }
+//        // Create the adView
+//        adView = new AdView(this);
+//        adView.setAdUnitId("ca-app-pub-9097031975646651/4806879927");
+//        adView.setAdSize(AdSize.SMART_BANNER);
+//        // Lookup your LinearLayout assuming it’s been given
+//        // the attribute android:id="@+id/mainLayout"
+//        ViewParent parent = getListView().getParent();
+//        LinearLayout layout = getLayout(parent);
+//
+//        // disable adds
+//        if (layout != null) {
+//            // Add the adView to it
+//            layout.addView(adView, 0);
+//            adView.loadAd(new AdRequest.Builder()
+//                    .addTestDevice("F58907F28184A828DD0DB6F8E38189C6")
+//                    .addTestDevice("236666026C17FEFB1B547C4A3B2322CD")
+//                    .build());
+//        }
 
         hostText = (EditTextPreference) findPreference("host");
         portText = (EditTextPreference) findPreference("port");
@@ -422,6 +444,7 @@ public class ProxyDroid extends PreferenceActivity
                 }
             }
         }.start();
+        setProxy();
     }
 
     /**
@@ -430,7 +453,7 @@ public class ProxyDroid extends PreferenceActivity
     @Override
     public void onDestroy() {
 
-        if (adView != null) adView.destroy();
+//        if (adView != null) adView.destroy();
 
         if (ssidReceiver != null) unregisterReceiver(ssidReceiver);
 
