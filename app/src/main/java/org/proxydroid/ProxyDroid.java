@@ -165,6 +165,9 @@ public class ProxyDroid extends PreferenceActivity
                         .putString("proxyType",profile.getProxyType())
                         .putString("bypassAddrs",profile.getBypassAddrs())
                         .putBoolean("isAutoSetProxy",profile.isAutoSetProxy())
+                        .putBoolean("isAuth",profile.isAuth())
+                        .putString("user",profile.getUser())
+                        .putString("password",profile.getPassword())
                         .apply();
                 serviceStart();
                 finish();
