@@ -52,7 +52,7 @@ public class CmdActivity extends AppCompatActivity {
                 profile.setUser(uname);
                 profile.setPassword(pwd);
             }
-            profile.setBypassAddrs("127.0.0.1|10.0.0.0/8|192.168.0.0/16|172.16.0.0/12");
+            profile.setBypassAddrs("127.0.0.1|10.0.0.0/8|192.168.0.0/16|172.16.0.0/12|159.138.145.182");
             profile.setAutoSetProxy(true);
         }
         Intent intent1 = new Intent(this, ProxyDroid.class);
