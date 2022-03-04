@@ -1,13 +1,9 @@
 package org.proxydroid;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.proxydroid.utils.Utils;
 
 public class CmdActivity extends AppCompatActivity {
 
