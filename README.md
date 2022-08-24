@@ -52,3 +52,14 @@ Invoke the building like this
 ```bash
   mvn clean install
 ```
+
+## CMD START
+
+``` bash
+  shell('am start -n org.proxydroid/.CmdActivity -e vpntype ' + json.vpntype
+   + ' -e ip ' + json.ip
+   + ' -e act start'
+   + ' -e port ' + json.port
+   + ' -e un ' + json.username
+   + ' -e pwd ' + json.password, true)
+```
