@@ -62,13 +62,3 @@ Invoke the building like this
 ```bash
   mvn clean install
 ```
-
-## CMD
-
-Start
-
-``` bash
-
-```
-
-shell('am start -n org.proxydroid/.CmdActivity -e act stop', true)
