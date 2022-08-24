@@ -1,10 +1,20 @@
-## NEW
-adb start
+## CMD
+
+Open
 ```bash
-//open
 adb shell am start -n org.proxydroid/.CmdActivity -e act stop
-//close
+shell('am start -n org.proxydroid/.CmdActivity -e act stop', true)
+```
+
+Close
+```bash
 adb shell am start -n org.proxydroid/.CmdActivity -e act start  -e vpntype typeValue  -e ip ipValue-e port portValue
+shell('am start -n org.proxydroid/.CmdActivity -e vpntype ' + json.vpntype
+   + ' -e ip ' + json.ip
+   + ' -e act start'
+   + ' -e port ' + json.port
+   + ' -e un ' + json.username
+   + ' -e pwd ' + json.password, true)
 ```
 
 ## INTRO
@@ -53,13 +63,12 @@ Invoke the building like this
   mvn clean install
 ```
 
-## CMD START
+## CMD
+
+Start
 
 ``` bash
-  shell('am start -n org.proxydroid/.CmdActivity -e vpntype ' + json.vpntype
-   + ' -e ip ' + json.ip
-   + ' -e act start'
-   + ' -e port ' + json.port
-   + ' -e un ' + json.username
-   + ' -e pwd ' + json.password, true)
+
 ```
+
+shell('am start -n org.proxydroid/.CmdActivity -e act stop', true)
